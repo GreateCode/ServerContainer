@@ -12,7 +12,7 @@ namespace guling_tools
 	typedef boost::shared_lock<R_W_MUTEX> R_LOCK;
 	typedef boost::unique_lock<R_W_MUTEX> W_LOCK;
 
-	//消费者队列
+	//线程安全队列
 	template<typename T>
 	class queue_s
 	{

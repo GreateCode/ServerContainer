@@ -18,5 +18,6 @@
 #include <map>
 #include <vector>
 #include <queue>
+#include <assert.h>
 
 #include "boost/smart_ptr.hpp"	//项目尽量使用智能指针
