@@ -6,6 +6,14 @@
 
 typedef struct tagMsgInfo
 {
+	tagMsgInfo()
+	{
+		nMsg = -1;
+		pInData = nullptr;
+		pOutData = nullptr;
+		pOwerner = nullptr;
+	}
+
 	int nMsg;			//消息
 	void* pInData;		//入参
 	void* pOutData;		//出参
@@ -35,13 +43,12 @@ public:
 	CMainContainer();
 	virtual ~CMainContainer();
 
-	bool InitContainer();
+	virtual bool InitContainer();
 
 	//同步任务要求
 	virtual bool SendContainerMsg(int nMsg, void* In, void* Out, void* pOwerner);
 	//异步任务要求
 	virtual bool PostContainerMsg(int nMsg, void* In, void* Out, void* pOwerner);
-
 protected:
 	//////////////////////////////////////////////////////////////////////////
 	guling_tools::R_W_MUTEX m_rwmutexRigsterMsgBean;
