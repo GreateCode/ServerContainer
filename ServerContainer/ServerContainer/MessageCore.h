@@ -37,11 +37,11 @@ typedef struct tagBeanInitInfo
 	int nCreateMode;			//加载方式，如果需要
 }BEAN_INIT_INFO, *LPBEAN_INIT_INFO;
 
-class CMainContainer : public IContainer
+class CMessageCore : public IContainer
 {
 public:
-	CMainContainer();
-	virtual ~CMainContainer();
+	CMessageCore();
+	virtual ~CMessageCore();
 
 	virtual bool InitContainer();
 

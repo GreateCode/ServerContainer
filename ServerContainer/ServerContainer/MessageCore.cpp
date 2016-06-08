@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "MainContainer.h"
+#include "MessageCore.h"
 #include "boost/assign.hpp"
 
-CMainContainer::CMainContainer()
+CMessageCore::CMessageCore()
 {
 	m_bThreadMainRun = false;
 }
 
 
-CMainContainer::~CMainContainer()
+CMessageCore::~CMessageCore()
 {
 }
 
-bool CMainContainer::SendContainerMsg(int nMsg, void* In, void* Out, void* pOwerner)
+bool CMessageCore::SendContainerMsg(int nMsg, void* In, void* Out, void* pOwerner)
 {
 	boost::shared_ptr<IBean> spBean(nullptr);
 	guling_tools::R_LOCK readLock(m_rwmutexRigsterMsgBean);
@@ -26,7 +26,7 @@ bool CMainContainer::SendContainerMsg(int nMsg, void* In, void* Out, void* pOwer
 	return spBean->OnContainerMsg(nMsg, In, Out, pOwerner) == -1 ? false : true;
 }
 
-bool CMainContainer::PostContainerMsg(int nMsg, void* In, void* Out, void* pOwerner)
+bool CMessageCore::PostContainerMsg(int nMsg, void* In, void* Out, void* pOwerner)
 {
 	guling_tools::R_LOCK readLock(m_rwmutexRigsterMsgBean);
 	auto itFindBean = m_mapRigsterMsgBean.find(nMsg);
@@ -42,7 +42,7 @@ bool CMainContainer::PostContainerMsg(int nMsg, void* In, void* Out, void* pOwer
 	return true;
 }
 
-void CMainContainer::ThreadMain()
+void CMessageCore::ThreadMain()
 {
 	while (m_bThreadMainRun)
 	{
@@ -52,16 +52,13 @@ void CMainContainer::ThreadMain()
 	}
 }
 
-void CMainContainer::ThreadWork(const MSG_INFO& msg_info)
+void CMessageCore::ThreadWork(const MSG_INFO& msg_info)
 {
 	boost::shared_ptr<IBean> spBean(nullptr);
 	guling_tools::R_LOCK readLock(m_rwmutexRigsterMsgBean);
 	auto itFindBean = m_mapRigsterMsgBean.find(msg_info.nMsg);
 	if (m_mapRigsterMsgBean.end() == itFindBean)
-	{
-		assert(false);
 		return;
-	}
 	std::vector<boost::shared_ptr<IBean>>queueMsgBean = itFindBean->second;
 	readLock.unlock();
 	for (auto& itVectorBean : queueMsgBean)
@@ -73,7 +70,7 @@ void CMainContainer::ThreadWork(const MSG_INFO& msg_info)
 	}
 }
 
-bool CMainContainer::InitContainer()
+bool CMessageCore::InitContainer()
 {
 	//////////////////////////////////////////////////////////////////////////
 	//先假设初始化的组件库
