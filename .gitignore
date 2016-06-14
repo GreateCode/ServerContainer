@@ -4,3 +4,6 @@ ServerContainer/ServerContainer.v12.suo
 ServerContainer/ServerContainer.sdf
 *.filters
 *.cd
+/ServerContainer/boost_1_61_0
+/ServerContainer/Debug
+/ServerContainer/ServerContainer/Debug
