@@ -47,7 +47,7 @@ namespace guling_tools
 			m_cvCall.notify_one();
 		}
 
-		void wait_and_pop(Data& popped_value)
+		void wait_and_pop(T& popped_value)
 		{
 			boost::mutex::scoped_lock lock(m_mutexLock);
 			while (m_queueData.empty())

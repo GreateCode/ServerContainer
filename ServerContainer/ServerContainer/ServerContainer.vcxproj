@@ -41,9 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>..\boost_1_61_0\stage\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>..\boost_1_61_0\stage\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -51,12 +53,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\GulingSVN\BrokerServer\common\boost_1_58_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\boost_1_61_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -66,7 +72,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\GulingSVN\BrokerServer\common\boost_1_58_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\boost_1_61_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -81,18 +87,21 @@
   <ItemGroup>
     <ClInclude Include="..\..\Interfaces\IBean.h" />
     <ClInclude Include="..\..\Interfaces\IContainer.h" />
+    <ClInclude Include="..\..\Interfaces\IMsgCore.h" />
     <ClInclude Include="..\..\Interfaces\IRoot.h" />
     <ClInclude Include="..\..\Interfaces\MsgDefine.h" />
     <ClInclude Include="BeanProxy.h" />
     <ClInclude Include="BeanStaticResource.h" />
+    <ClInclude Include="MainContainer.h" />
     <ClInclude Include="MessageCore.h" />
-    <ClInclude Include="SafeQueue.h" />
+    <ClInclude Include="gl_tools.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BeanProxy.cpp" />
     <ClCompile Include="BeanStaticResource.cpp" />
+    <ClCompile Include="MainContainer.cpp" />
     <ClCompile Include="MessageCore.cpp" />
     <ClCompile Include="ServerContainer.cpp" />
     <ClCompile Include="stdafx.cpp">

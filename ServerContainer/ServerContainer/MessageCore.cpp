@@ -12,7 +12,7 @@ CMessageCore::~CMessageCore()
 {
 }
 
-bool CMessageCore::SendContainerMsg(int nMsg, void* In, void* Out, void* pOwerner)
+bool CMessageCore::DoMission(int nMsg, void* In, void* Out, void* pOwerner)
 {
 	boost::shared_ptr<IBean> spBean(nullptr);
 	guling_tools::R_LOCK readLock(m_rwmutexRigsterMsgBean);
@@ -26,7 +26,7 @@ bool CMessageCore::SendContainerMsg(int nMsg, void* In, void* Out, void* pOwerne
 	return spBean->OnContainerMsg(nMsg, In, Out, pOwerner) == -1 ? false : true;
 }
 
-bool CMessageCore::PostContainerMsg(int nMsg, void* In, void* Out, void* pOwerner)
+bool CMessageCore::RequestMission(int nMsg, void* In, void* Out, void* pOwerner)
 {
 	guling_tools::R_LOCK readLock(m_rwmutexRigsterMsgBean);
 	auto itFindBean = m_mapRigsterMsgBean.find(nMsg);
@@ -48,7 +48,7 @@ void CMessageCore::ThreadMain()
 	{
 		MSG_INFO msg_info;
 		m_safequeueMsgInfo.wait_and_pop(msg_info);
-		boost::thread(boost::bind(&ThreadWork, this, msg_info));
+		boost::thread(boost::bind(&CMessageCore::ThreadWork, this, msg_info));
 	}
 }
 
@@ -70,14 +70,27 @@ void CMessageCore::ThreadWork(const MSG_INFO& msg_info)
 	}
 }
 
-bool CMessageCore::InitContainer()
+bool CMessageCore::InitBean()
 {
-	//////////////////////////////////////////////////////////////////////////
-	//先假设初始化的组件库
-	boost::assign::insert(m_mapBeanInitInfo)
-		(1, BEAN_INIT_INFO("gl_communicate.dll", "通信模块", "实现主服务通信的功能", 0))
-		(2, BEAN_INIT_INFO("gl_brokerlogic.dll", "券商逻辑模块", "实现券商层公用的逻辑功能", 0))
-		(3, BEAN_INIT_INFO("gl_broker.dll", "券商模块", "实现券商层与券商的连接功能", 0));
-	//////////////////////////////////////////////////////////////////////////
+	throw std::logic_error("The method or operation is not implemented.");
+}
 
+bool CMessageCore::Release()
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+int CMessageCore::Status()
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+IBean::BeanType CMessageCore::Type()
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+int CMessageCore::OnContainerMsg(int nMsg, void* pIn, void* pOut, void* pOwerner)
+{
+	throw std::logic_error("The method or operation is not implemented.");
 }
