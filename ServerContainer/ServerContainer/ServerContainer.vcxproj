@@ -92,6 +92,7 @@
     <ClInclude Include="..\..\Interfaces\MsgDefine.h" />
     <ClInclude Include="BeanProxy.h" />
     <ClInclude Include="BeanStaticResource.h" />
+    <ClInclude Include="ContainerDirManager.h" />
     <ClInclude Include="MainContainer.h" />
     <ClInclude Include="MessageCore.h" />
     <ClInclude Include="gl_tools.h" />
@@ -101,6 +102,7 @@
   <ItemGroup>
     <ClCompile Include="BeanProxy.cpp" />
     <ClCompile Include="BeanStaticResource.cpp" />
+    <ClCompile Include="ContainerDirManager.cpp" />
     <ClCompile Include="MainContainer.cpp" />
     <ClCompile Include="MessageCore.cpp" />
     <ClCompile Include="ServerContainer.cpp" />
