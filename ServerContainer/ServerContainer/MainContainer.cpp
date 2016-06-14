@@ -4,6 +4,7 @@
 
 CMainContainer::CMainContainer()
 {
+	m_pDefaultMsgCore = nullptr;
 }
 
 

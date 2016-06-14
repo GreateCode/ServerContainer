@@ -11,6 +11,7 @@ public:
 
 	virtual int OnContainerMsg(int nMsg, void* pIn, void* pOut, void* pOwerner);
 
+	virtual bool LoadPreinstallBean(const std::string& strPreinstall);
 protected:
 	//默认消息核心组件
 	CBeanProxy* m_pDefaultMsgCore;
